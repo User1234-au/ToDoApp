@@ -41,8 +41,11 @@ function addTodo() {
   deleteBtn.textContent = '✕';
   deleteBtn.setAttribute('aria-label', 'Supprimer la tâche');
   deleteBtn.addEventListener('click', () => {
-    li.remove();
-    updateEmptyMsg();
+    li.classList.add('removing');
+    li.addEventListener('animationend', () => {
+      li.remove();
+      updateEmptyMsg();
+    }, { once: true });
   });
 
   li.appendChild(span);
